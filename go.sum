@@ -1,5 +1,5 @@
-github.com/CherkashinEvgeny/gojob v1.0.0-alpha-856e2ea9d89e0fe497a8bb17aa23612cb6bc39f4 h1:9kXrP/CVtPE4WFWIst8hvl2p3h0w+kpE81h9K1ACz+U=
-github.com/CherkashinEvgeny/gojob v1.0.0-alpha-856e2ea9d89e0fe497a8bb17aa23612cb6bc39f4/go.mod h1:P2D39M7HTH5ErzaVkdvTSkzY4Ylsg7k9KfvrxXJtjo4=
+github.com/CherkashinEvgeny/gojob v1.0.0-alpha-2392570773451d83a5bc5c7810deece15fafe591 h1:YkSll3FFXVRULek15FBl/xUT17TRLLVDUBZm7Ece0DQ=
+github.com/CherkashinEvgeny/gojob v1.0.0-alpha-2392570773451d83a5bc5c7810deece15fafe591/go.mod h1:P2D39M7HTH5ErzaVkdvTSkzY4Ylsg7k9KfvrxXJtjo4=
 github.com/CherkashinEvgeny/gopool v1.0.0-alpha-f944c3bf7bd6c450dcd9da07859f50855831220f h1:litBC1KRxtSO3lMvq1AOCa2xa+afvnBKuLga1TiXr6w=
 github.com/CherkashinEvgeny/gopool v1.0.0-alpha-f944c3bf7bd6c450dcd9da07859f50855831220f/go.mod h1:SOXhTvXMWMQJgK8x3GZDpd2KxMVTLqH6luG7NQTigxY=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

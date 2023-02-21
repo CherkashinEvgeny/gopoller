@@ -3,7 +3,7 @@ module github.com/CherkashinEvgeny/gopoller
 go 1.18
 
 require (
-	github.com/CherkashinEvgeny/gojob v1.0.0-alpha-856e2ea9d89e0fe497a8bb17aa23612cb6bc39f4
+	github.com/CherkashinEvgeny/gojob v1.0.0-alpha-2392570773451d83a5bc5c7810deece15fafe591
 	github.com/CherkashinEvgeny/gopool v1.0.0-alpha-f944c3bf7bd6c450dcd9da07859f50855831220f
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.8.1
