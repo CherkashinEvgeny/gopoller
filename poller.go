@@ -17,7 +17,7 @@ type Poller struct {
 	n         int
 	size      int
 	threshold int
-	pool      *pool.Pool
+	worker    *pool.Pool
 	ch        chan struct{}
 	next      func(ctx context.Context, limit int) (tasks []Task, hasMore bool)
 }
@@ -49,7 +49,7 @@ func New(
 	poller.n = 0
 	poller.size = size
 	poller.threshold = threshold
-	poller.pool = pool.New(concurrency)
+	poller.worker = pool.New(concurrency)
 	poller.ch = make(chan struct{}, size)
 	poller.next = next
 	return
@@ -103,7 +103,7 @@ func (k *Poller) waitForThresholdCondition(ctx context.Context) (success bool) {
 
 func (k *Poller) scheduleTask(ctx context.Context, task Task) {
 	k.n++
-	k.pool.Exec(func() {
+	k.worker.Exec(func() {
 		defer func() {
 			k.ch <- struct{}{}
 		}()
