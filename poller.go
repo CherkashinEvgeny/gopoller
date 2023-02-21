@@ -77,19 +77,19 @@ func min(values ...int) (result int) {
 	return
 }
 
-func (k *Poller) Start() {
-	k.StartContext(context.Background())
+func (p *Poller) Start() {
+	p.StartContext(context.Background())
 }
 
-func (k *Poller) StartContext(ctx context.Context) {
-	k.job.StartContext(ctx)
+func (p *Poller) StartContext(ctx context.Context) {
+	p.job.StartContext(ctx)
 }
 
-func (k *Poller) payload(ctx context.Context) {
-	for k.waitForThresholdCondition(ctx) {
-		tasks, hasMore := k.next(ctx, k.size-k.n)
+func (p *Poller) payload(ctx context.Context) {
+	for p.waitForThresholdCondition(ctx) {
+		tasks, hasMore := p.next(ctx, p.size-p.n)
 		for _, task := range tasks {
-			k.scheduleTask(ctx, task)
+			p.scheduleTask(ctx, task)
 		}
 		if !hasMore {
 			return
@@ -97,45 +97,45 @@ func (k *Poller) payload(ctx context.Context) {
 	}
 }
 
-func (k *Poller) waitForThresholdCondition(ctx context.Context) (success bool) {
-	return k.waitN(ctx, k.n-(k.threshold-1))
+func (p *Poller) waitForThresholdCondition(ctx context.Context) (success bool) {
+	return p.waitN(ctx, p.n-(p.threshold-1))
 }
 
-func (k *Poller) scheduleTask(ctx context.Context, task Task) {
-	k.n++
-	k.worker.Exec(func() {
+func (p *Poller) scheduleTask(ctx context.Context, task Task) {
+	p.n++
+	p.worker.Exec(func() {
 		defer func() {
-			k.ch <- struct{}{}
+			p.ch <- struct{}{}
 		}()
 		task.Run(ctx)
 	})
 }
 
-func (k *Poller) Stop() {
-	k.StopContext(context.Background())
+func (p *Poller) Stop() {
+	p.StopContext(context.Background())
 }
 
-func (k *Poller) StopContext(ctx context.Context) {
-	k.job.StopContext(ctx)
+func (p *Poller) StopContext(ctx context.Context) {
+	p.job.StopContext(ctx)
 	if !isContextCanceled(ctx) {
-		k.waitForGracefulShutdown(ctx)
+		p.waitForGracefulShutdown(ctx)
 	}
 }
 
-func (k *Poller) waitForGracefulShutdown(ctx context.Context) {
-	_ = k.waitN(ctx, k.n)
+func (p *Poller) waitForGracefulShutdown(ctx context.Context) {
+	_ = p.waitN(ctx, p.n)
 }
 
-func (k *Poller) waitN(ctx context.Context, n int) (success bool) {
-	if n > k.n {
-		n = k.n
+func (p *Poller) waitN(ctx context.Context, n int) (success bool) {
+	if n > p.n {
+		n = p.n
 	}
 	for i := 0; i < n; i++ {
 		select {
 		case <-ctx.Done():
 			return
-		case <-k.ch:
-			k.n--
+		case <-p.ch:
+			p.n--
 			break
 		}
 	}
