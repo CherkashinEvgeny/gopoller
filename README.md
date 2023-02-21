@@ -17,7 +17,7 @@ Features:
 ## Usage
 
 ```
-process := poller.New(3*time.Second, 2, 2, 2, func(limit int) ([]poller.Task, bool) {
+process := poller.New(3*time.Second, 2, 2, 2, func(ctx context.Context, limit int) ([]poller.Task, bool) {
 	return fetchTasksFromDatabase(limit)
 })
 process.Start()
