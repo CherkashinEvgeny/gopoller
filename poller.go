@@ -111,6 +111,10 @@ func (p *Poller) scheduleTask(ctx context.Context, task Task) {
 	})
 }
 
+func (p *Poller) Done() <-chan struct{} {
+	return p.job.Done()
+}
+
 func (p *Poller) Stop() {
 	p.StopContext(context.Background())
 }
